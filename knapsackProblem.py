@@ -3,21 +3,41 @@
 elementos = [(2, 3), (3, 4), (4, 5), (5, 6)]
 vi = []
 wi = []
-maxCapacidad = 8
+maxCap = 8
 
 
-def solveKnapsack(maxCap, wi, val, n):
+def solveKnapsack(elementos, maxCap, n):
+    n = len(elementos)
+    # Creamos una tabla para almacenar los resultados de los subproblemas
+    table = [[0 for _ in range(maxCap + 1)] for _ in range(n + 1)]
 
-    if n == 0 or maxCap == 0 :
-        return 0
+    # Resolvemos los subproblemas de forma iterativa
+    for i in range(1, n + 1):
+        for j in range(1, maxCap + 1):
+            wi, vi = elementos[i - 1]
+            if wi > j:
+                # Si el peso del elemento i es mayor que la capacidad j, no podemos llevarlo
+                table[i][j] = table[i - 1][j]
+            else:
+                # Si podemos llevar el elemento i, debemos decidir si lo llevamos o no
+                table[i][j] = max(table[i - 1][j], vi + table[i - 1][j - wi])
 
-    # si el peso del n_avo elemento es mayor que la capacidad de la mochila
-    # entonces no se incluye 
-    if (wi[n-1] > maxCap):
-        return solveKnapsack(maxCap, wi, val, n-1)
+    # Recuperamos los elementos seleccionados y el valor total obtenido selected_items
+    elementos_seleccionados = []
+    j = maxCap
+    for i in range(n, 0, -1):
+        if table[i][j] != table[i - 1][j]:
 
-    else:
-        return max(val[n-1] + solveKnapsack(maxCap - wi[n-1], wi, val, n-1), solveKnapsack(maxCap, wi, val, n-1))
+            elementos_seleccionados.append(elementos[i - 1])
+            j -= elementos[i - 1][0]
+
+            if j == 0:
+                break
+
+    valorTotal = table[n][maxCap]
+
+    return elementos_seleccionados[::-1], valorTotal
+
 
 def separarPesoValor(elementos, wi, vi):
     for peso, valor in elementos:
@@ -26,15 +46,12 @@ def separarPesoValor(elementos, wi, vi):
     
     return wi, vi
 
-
 wi, vi = separarPesoValor(elementos, wi, vi)
 
-print(wi)
-print(vi)
+print("\nPesos Elementos (wi): ", wi)
+print("Valores Elementos (vi): ", vi)
 n = len(vi)
+print("Tam lista valores: ", n)
+solucion = solveKnapsack(elementos, maxCap, n)
 
-#print(n)
-solucion = solveKnapsack(maxCapacidad, wi, vi, n)
-#solucion = solveKnapsack(0, wi, vi, 0)
-
-print("Valor Total: ", solucion)
+print("Combinacion mas optima: ", solucion)
