@@ -1,4 +1,5 @@
-
+# Autor: Juan Jose Restrepo Rosero
+# Intern Veevart 2023
 
 elementos = [(2, 3), (3, 4), (4, 5), (5, 6)]
 vi = []
