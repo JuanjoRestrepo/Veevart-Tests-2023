@@ -53,3 +53,28 @@ def jugar():
 # comenzar el juego
 jugar()
 
+
+
+"""
+
+Este código es una implementación en Python del juego de la serpiente y la escalera.
+
+Primero, se definen los diccionarios ladders y snakes que representan las posiciones de las escaleras y serpientes en el tablero del juego.
+
+La función tirarDado() genera un número aleatorio entre 1 y 6 para simular el lanzamiento del dado.
+
+La función moverJugador() actualiza la posición del jugador en función del número de pasos dados. 
+Si la nueva posición está en una escalera o serpiente, se mueve a la nueva posición correspondiente.
+
+La función jugar() inicia el juego con la posición inicial del jugador en 0 y un contador de turnos en 0. 
+El bucle principal del juego se ejecuta mientras la posición del jugador sea menor que 25. En cada iteración del bucle, 
+se lanza el dado, se actualiza la posición del jugador y se incrementa el contador de turnos. 
+Si el jugador llega a la posición 25 o la supera, se imprime un mensaje de que ha ganado el juego. 
+Finalmente, se imprime un mensaje de fin del juego.
+
+Para hacer el juego más realista, se han agregado pausas de tiempo en las funciones tirarDado() y moverJugador() utilizando la función time.sleep().
+También se han utilizado f-strings para imprimir mensajes en la consola.
+
+
+"""
+
