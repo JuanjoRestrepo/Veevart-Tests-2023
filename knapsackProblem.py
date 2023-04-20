@@ -23,7 +23,7 @@ def solveKnapsack(elementos, maxCap, n):
                 # Si podemos llevar el elemento i, debemos decidir si lo llevamos o no
                 table[i][j] = max(table[i - 1][j], vi + table[i - 1][j - wi])
 
-    # Recuperamos los elementos seleccionados y el valor total obtenido selected_items
+    # Recuperamos los elementos seleccionados y el valor total obtenido elementos_seleccionados
     elementos_seleccionados = []
     j = maxCap
     for i in range(n, 0, -1):
